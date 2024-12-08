@@ -1,0 +1,92 @@
+services:
+
+  application:
+    build:
+      context: ../
+      dockerfile: ./docker/php/Dockerfile
+    container_name: application
+    restart: always
+    volumes:
+      - ../:/var/www/taskflow/
+    depends_on:
+      - application_database
+      - backend
+    networks:
+      - taskflow
+
+  application_database:
+    image: postgres:15
+    container_name: app_db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: TASKAPP
+      POSTGRES_PASSWORD: TASKPASSWORD
+    volumes:
+      - postgres-data-15:/var/lib/postgresql/data
+    networks:
+      - taskflow
+
+  backend:
+    build:
+      context: ../
+      dockerfile: ./docker/php/Dockerfile
+    container_name: backend
+    volumes:
+      - ../:/var/www/taskflow/
+    restart: always
+    depends_on:
+      - backend_database
+    networks:
+      - taskflow
+
+
+  backend_database:
+    image: postgres:15
+    container_name: backend_db
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: TASKADMIN
+      POSTGRES_PASSWORD: TASKPASSWORD
+    volumes:
+      - postgres-data-15:/var/lib/postgresql/data
+    networks:
+      - taskflow
+
+  websockets:
+    container_name: websockets
+    image: centrifugo/centrifugo:latest
+    volumes:
+      - ../docker/websockets/centrifuge.json:/etc/centrifugo/config.json
+    networks:
+      - taskflow
+    command: ["centrifugo", "-c", "/etc/centrifugo/config.json", "--port=8000", "--admin"]
+    ports:
+      - "8000:8000"
+
+  webserver:
+    image: nginx:latest
+    container_name: webserver
+    volumes:
+      - ../:/var/www/taskflow/
+      - ../docker/nginx/webserver.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - application
+      - backend
+      - websockets
+    networks:
+      - taskflow
+
+networks:
+  taskflow:
+    driver: bridge
+    external: true
+  taskdb:
+    internal: true
+
+volumes:
+  postgres-data-15:
+    driver: local
