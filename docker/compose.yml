@@ -1,92 +1,102 @@
+version: '3.9'
+
 services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/webserver.conf:/etc/nginx/conf.d/webserver.conf
+      - ../application:/var/www/application
+      - ../taskadmin:/var/www/taskadmin
+      - ../site:/var/www/site
+    depends_on:
+      - application
+      - taskadmin
+      - site
+    networks:
+      - external_network
 
   application:
     build:
-      context: ../
-      dockerfile: ./docker/php/Dockerfile
+      context: ./application
+      dockerfile: Dockerfile
+      args:
+        USER_ID: ${UID}
+        GROUP_ID: ${GID}
     container_name: application
-    restart: always
     volumes:
-      - ../:/var/www/taskflow/
-    depends_on:
-      - application_database
-      - backend
-    networks:
-      - taskflow
-
-  application_database:
-    image: postgres:15
-    container_name: app_db
-    ports:
-      - "5432:5432"
+      - ../application:/var/www/application
     environment:
-      POSTGRES_USER: TASKAPP
-      POSTGRES_PASSWORD: TASKPASSWORD
-    volumes:
-      - postgres-data-15:/var/lib/postgresql/data
+      - DB_HOST=application_db
+      - DB_PORT=5432
+      - DB_DATABASE=application_db
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=secret
+    depends_on:
+      - application_db
     networks:
-      - taskflow
+      - external_network
 
-  backend:
+  taskadmin:
     build:
-      context: ../
-      dockerfile: ./docker/php/Dockerfile
-    container_name: backend
+      context: ./taskadmin
+      dockerfile: Dockerfile
+      args:
+        USER_ID: ${UID}
+        GROUP_ID: ${GID}
+    container_name: taskadmin
     volumes:
-      - ../:/var/www/taskflow/
-    restart: always
-    depends_on:
-      - backend_database
-    networks:
-      - taskflow
-
-
-  backend_database:
-    image: postgres:15
-    container_name: backend_db
-    ports:
-      - "5433:5432"
+      - ../taskadmin:/var/www/taskadmin
     environment:
-      POSTGRES_USER: TASKADMIN
-      POSTGRES_PASSWORD: TASKPASSWORD
-    volumes:
-      - postgres-data-15:/var/lib/postgresql/data
-    networks:
-      - taskflow
-
-  websockets:
-    container_name: websockets
-    image: centrifugo/centrifugo:latest
-    volumes:
-      - ../docker/websockets/centrifuge.json:/etc/centrifugo/config.json
-    networks:
-      - taskflow
-    command: ["centrifugo", "-c", "/etc/centrifugo/config.json", "--port=8000", "--admin"]
-    ports:
-      - "8000:8000"
-
-  webserver:
-    image: nginx:latest
-    container_name: webserver
-    volumes:
-      - ../:/var/www/taskflow/
-      - ../docker/nginx/webserver.conf:/etc/nginx/conf.d/default.conf
-    ports:
-      - "80:80"
+      - DB_HOST=taskadmin_db
+      - DB_PORT=5432
+      - DB_DATABASE=taskadmin_db
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=secret
     depends_on:
-      - application
-      - backend
-      - websockets
+      - taskadmin_db
     networks:
-      - taskflow
+      - external_network
 
-networks:
-  taskflow:
-    driver: bridge
-    external: true
-  taskdb:
-    internal: true
+  site:
+    image: php:8.3-fpm
+    container_name: site
+    volumes:
+      - ../site:/var/www/site
+    networks:
+      - external_network
+
+  application_db:
+    image: postgres:latest
+    container_name: application_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: application_db
+    volumes:
+      - application_db_data:/var/lib/postgresql/data
+    networks:
+      - internal_network
+
+  taskadmin_db:
+    image: postgres:latest
+    container_name: taskadmin_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: taskadmin_db
+    volumes:
+      - taskadmin_db_data:/var/lib/postgresql/data
+    networks:
+      - internal_network
 
 volumes:
-  postgres-data-15:
-    driver: local
+  application_db_data:
+  taskadmin_db_data:
+
+networks:
+  internal_network:
+  external_network:
+    external: true
