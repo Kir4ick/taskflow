@@ -20,8 +20,8 @@ services:
 
   application:
     build:
-      context: ./application
-      dockerfile: Dockerfile
+      context: ../application
+      dockerfile: ../docker/application/Dockerfile
       args:
         USER_ID: ${UID}
         GROUP_ID: ${GID}
@@ -29,20 +29,21 @@ services:
     volumes:
       - ../application:/var/www/application
     environment:
-      - DB_HOST=application_db
+      - DB_HOST=applicationdb
       - DB_PORT=5432
       - DB_DATABASE=application_db
       - DB_USERNAME=postgres
       - DB_PASSWORD=secret
     depends_on:
-      - application_db
+      - applicationdb
     networks:
       - external_network
+      - internal_network
 
   taskadmin:
     build:
-      context: ./taskadmin
-      dockerfile: Dockerfile
+      context: ../taskadmin
+      dockerfile: ../docker/taskadmin/Dockerfile
       args:
         USER_ID: ${UID}
         GROUP_ID: ${GID}
@@ -50,15 +51,16 @@ services:
     volumes:
       - ../taskadmin:/var/www/taskadmin
     environment:
-      - DB_HOST=taskadmin_db
+      - DB_HOST=taskadmindb
       - DB_PORT=5432
       - DB_DATABASE=taskadmin_db
       - DB_USERNAME=postgres
       - DB_PASSWORD=secret
     depends_on:
-      - taskadmin_db
+      - taskadmindb
     networks:
       - external_network
+      - internal_network
 
   site:
     image: php:8.3-fpm
@@ -67,30 +69,37 @@ services:
       - ../site:/var/www/site
     networks:
       - external_network
+      - internal_network
 
-  application_db:
+  applicationdb:
     image: postgres:latest
-    container_name: application_db
+    container_name: applicationdb
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: application_db
+    ports:
+      - "5433:5432"
     volumes:
       - application_db_data:/var/lib/postgresql/data
     networks:
       - internal_network
+      - external_network
 
-  taskadmin_db:
+  taskadmindb:
     image: postgres:latest
-    container_name: taskadmin_db
+    container_name: taskadmindb
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: taskadmin_db
+    ports:
+      - "5432:5432"
     volumes:
       - taskadmin_db_data:/var/lib/postgresql/data
     networks:
       - internal_network
+      - external_network
 
 volumes:
   application_db_data:

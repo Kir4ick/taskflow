@@ -1,48 +1,98 @@
 <?php
 
+/**
+ * Created by Reliese Model.
+ */
+
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
+/**
+ * Class User
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property int $company_id
+ * @property string $password
+ * @property string|null $remember_token
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ *
+ * @property Company $company
+ * @property Collection|Role[] $roles
+ * @property Collection|Task[] $tasks
+ * @property Collection|UsersWorked[] $users_workeds
+ * @property Collection|TaskFile[] $task_files
+ * @property Collection|TaskComment[] $task_comments
+ * @property Collection|TaskHistory[] $task_histories
+ * @property Collection|TaskTime[] $task_times
+ *
+ * @package App\Models
+ */
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+	protected $table = 'users';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+	protected $casts = [
+		'company_id' => 'int'
+	];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+	protected $hidden = [
+		'password',
+		'remember_token'
+	];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+	protected $fillable = [
+		'name',
+		'email',
+		'company_id',
+		'password',
+		'remember_token'
+	];
+
+	public function company()
+	{
+		return $this->belongsTo(Company::class);
+	}
+
+	public function roles()
+	{
+		return $this->belongsToMany(Role::class, 'users_roles')
+					->withPivot('id')
+					->withTimestamps();
+	}
+
+	public function tasks()
+	{
+		return $this->hasMany(Task::class, 'created_by');
+	}
+
+	public function usersWorkeds()
+	{
+		return $this->hasMany(UsersWorked::class);
+	}
+
+	public function taskFiles()
+	{
+		return $this->hasMany(TaskFile::class);
+	}
+
+	public function taskComments()
+	{
+		return $this->hasMany(TaskComment::class);
+	}
+
+	public function taskHistories()
+	{
+		return $this->hasMany(TaskHistory::class);
+	}
+
+	public function taskTimes()
+	{
+		return $this->hasMany(TaskTime::class);
+	}
 }

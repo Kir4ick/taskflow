@@ -15,8 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('email')->unique();
             $table->string('password');
+            $table->boolean('is_super_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->unsignedBigInteger('deleted_by');
+
+            $table->foreign('deleted_by')
+                ->references('id')
+                ->on('users');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
