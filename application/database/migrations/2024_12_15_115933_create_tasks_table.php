@@ -23,6 +23,9 @@ return new class extends Migration
 
             $table->unsignedBigInteger('created_by');
             $table->foreign('created_by')->on('users')->references('id')->cascadeOnDelete();
+
+            $table->unsignedBigInteger('dashboard_id');
+            $table->foreign('dashboard_id')->on('dashboards')->references('id')->cascadeOnDelete();
         });
 
         Schema::create('users_worked', function (Blueprint $table) {

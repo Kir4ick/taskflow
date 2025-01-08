@@ -1,0 +1,193 @@
+.close-right-modal {
+    transform: translateX(1000px);
+}
+
+.close-center-modal {
+    transform: translateY(-40px) !important;
+    display: none;
+    z-index: -999 !important;
+}
+
+.modal-questionnaire {
+    height: 100%;
+    max-width: 1024px;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    padding: 70px 100px;
+
+    background: #FBEFFF;
+    transition: 0.5s ease all;
+}
+
+.questionnaire-form {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    column-gap: 80px;
+}
+
+.questionnaire-form textarea {
+    height: 250px;
+}
+
+.modal-questionnaire .close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+
+    width: 20px;
+    height: 20px;
+}
+
+.drag-and-drop {
+    margin-top: 10px;
+}
+
+.drag-description {
+    margin-top: 10px;
+    max-width: 200px;
+}
+
+.drag-title {
+    font-weight: bold;
+}
+
+.modal-questionnaire button {
+    width: 280px;
+    height: 65px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+
+    margin-top: 30px;
+
+    color: #14123A;
+    font-weight: bold;
+
+    background: linear-gradient(90deg, #3B4882 0%, #CC99F8 100%);
+}
+
+.clipped-files {
+    margin-top: 90px;
+}
+
+#file-list-wrapper {
+    margin-top: 10px;
+    border-radius: 10px;
+    background: #3B4882;
+
+    padding: 24px 30px;
+
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.file-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.file-content p {
+    color: white;
+    font-size: 10px;
+
+    width: 100%;
+    margin-left: 8px;
+}
+
+.delete-file {
+    cursor: pointer;
+}
+
+.file-content:not(:first-child) {
+    margin-top: 10px;
+}
+
+.auth-modal {
+    width: 820px;
+    position: absolute;
+
+    background: linear-gradient(57deg, #E8F0FF 3%, #EAE6FF 53%, #FFE4FA 100%);
+
+    top: 120px;
+
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+
+    z-index: 999;
+    border-radius: 10px;
+    padding-top: 60px;
+
+    padding-bottom: 100px;
+    overflow: hidden;
+
+    transition: 0.2s ease all;
+
+    transform: translateY(-100px);
+}
+
+.auth-modal form {
+    margin: auto;
+    width: 450px;
+}
+
+.auth-modal .form-data {
+    margin-top: 40px;
+    height: 170px;
+}
+
+.auth-modal button {
+    width: 280px;
+
+    background: linear-gradient(90deg, #97C0F1 0%, #CC99F8 100%);
+    color: #14123A;
+    padding: 10px 0px;
+
+    margin-top: 25px;
+    border-radius: 10px;
+
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.auth-monitor {
+    position: absolute;
+    left: -22px;
+    bottom: -12px;
+}
+
+.auth-tasks {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+
+.auth-title-wrapper {
+    position: relative;
+}
+
+.arrow-close {
+    position: absolute;
+    cursor: pointer;
+
+    top: 10px !important;
+    left: -120px !important;
+
+    background: none !important;
+    border: none !important;
+
+    height: auto !important;
+    width: auto !important;
+
+    margin-top: 0px !important;
+    padding: 0px !important;
+}

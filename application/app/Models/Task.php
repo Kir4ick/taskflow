@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Task
- * 
+ *
  * @property int $id
  * @property string $title
  * @property string $description
@@ -24,13 +24,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
  * @property int $created_by
- * 
+ *
  * @property User $user
- * @property Collection|UsersWorked[] $users_workeds
- * @property Collection|TaskFile[] $task_files
- * @property Collection|TaskComment[] $task_comments
- * @property Collection|TaskHistory[] $task_histories
- * @property Collection|TaskTime[] $task_times
+ * @property Collection|UsersWorked[] $usersWorkers
+ * @property Collection|TaskFile[] $taskFiles
+ * @property Collection|TaskComment[] $taskComments
+ * @property Collection|TaskHistory[] $taskHistories
+ * @property Collection|TaskTime[] $taskTimes
  *
  * @package App\Models
  */
@@ -60,27 +60,27 @@ class Task extends Model
 		return $this->belongsTo(User::class, 'created_by');
 	}
 
-	public function users_workeds()
+	public function usersWorkeds()
 	{
 		return $this->hasMany(UsersWorked::class);
 	}
 
-	public function task_files()
+	public function taskFiles()
 	{
 		return $this->hasMany(TaskFile::class);
 	}
 
-	public function task_comments()
+	public function taskComments()
 	{
 		return $this->hasMany(TaskComment::class);
 	}
 
-	public function task_histories()
+	public function taskHistories()
 	{
 		return $this->hasMany(TaskHistory::class);
 	}
 
-	public function task_times()
+	public function taskTimes()
 	{
 		return $this->hasMany(TaskTime::class);
 	}

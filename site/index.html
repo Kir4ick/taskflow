@@ -1,10 +1,249 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>TaskFlow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Flow</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/modals.css">
+    <link rel="stylesheet" href="assets/form.css">
 </head>
 <body>
+<header>
+    <div class="container">
+        <img src="assets/images/logo.svg" alt="">
+    </div>
+</header>
+<main>
+    <div class="container">
+        <div class="first-row">
+            <img src="assets/images/large.png" alt="">
+        </div>
+        <div class="second-row">
+            <img src="assets/images/monitor.png" alt="">
+            <div class="second-content">
+                <div class="first-text">
+                    <h1>вести проекты</h1>
+                    <p>
+                        лучшая платформа для отслеживания задач
+                        ведите проекты своей компании с легкостью
+                    </p>
+                </div>
+                <div class="second-text">
+                    <h1>еще не было</h1>
+                    <p style="margin-top: 35px">
+                        мощный инструмент для отслеживания задач, который поможет вашей команде работать эффективнее и организованнее
+                    </p>
+                </div>
+                <div class="thirty-text">
+                    <div></div>
+                    <div class="some-text">
+                        <h1>так просто</h1>
+                        <p>легкий в использовании интерфейс позволит вам быстро адаптироваться и сосредоточиться на том, что действительно важно — выполнении задач</p>
+                    </div>
+                    <div class="some-image">
+                        <img src="assets/images/man.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="thirty-row">
+            <h6>создавайте доски</h6>
+            <div class="thirty-row-content">
+                <div class="row-c-tasks">
+                    <img class="tasks-img" src="assets/images/tasks.png" alt="">
+                    <img class="tasks-calendar" src="assets/images/calendar.png" alt="">
+                </div>
+                <div class="tasks-content">
+                    <h6>делите их на задачи</h6>
+                    <img src="assets/images/questions.png" alt="">
+                </div>
+                <div class="content-actions">
+                    <div class="info-section">
+                        <img src="assets/images/developers.png" alt="">
+                        <h6>ведите <br> команды разработчиков</h6>
+                    </div>
+                    <div class="actions">
+                        <button id="auth">войти</button>
+                        <button id="questionnaire">присоеденяйся</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 
+
+<div id="modal-questionnaire" class="modal-questionnaire close-right-modal">
+    <img id="close-questionnaire" class="close" src="assets/images/close.svg" alt="">
+    <form class="questionnaire-form">
+        <div class="files-form">
+            <div class="drag-wrapper">
+                <p class="drag-title">Ваши документы</p>
+                <div id="drag-files" class="drag-and-drop">
+                    <div class="drag-content">
+                        <div class="hover-arrow">
+                            <img src="assets/images/top-arrow.svg" alt="">
+                        </div>
+                        <p>Загрузить файлы</p>
+                    </div>
+                </div>
+                <p class="drag-description">*Добавьте документы подтверждающие существование компании</p>
+            </div>
+
+            <div class="clipped-files">
+                <p style="font-weight: bold">Файлы</p>
+                <div id="file-list-wrapper">
+                    <div class="file-content">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_132_365)">
+                                <path d="M19.949 5.53602L16.465 2.05002C15.8163 1.39816 15.0449 0.881354 14.1952 0.529482C13.3456 0.177611 12.4346 -0.00234388 11.515 2.30487e-05H7C5.67441 0.00161091 4.40356 0.528905 3.46622 1.46624C2.52888 2.40358 2.00159 3.67443 2 5.00002V19C2.00159 20.3256 2.52888 21.5965 3.46622 22.5338C4.40356 23.4711 5.67441 23.9984 7 24H17C18.3256 23.9984 19.5964 23.4711 20.5338 22.5338C21.4711 21.5965 21.9984 20.3256 22 19V10.485C22.0025 9.56545 21.8225 8.65451 21.4704 7.805C21.1184 6.95548 20.6012 6.18426 19.949 5.53602ZM18.535 6.95002C18.8404 7.26417 19.103 7.61721 19.316 8.00002H15C14.7348 8.00002 14.4804 7.89467 14.2929 7.70713C14.1054 7.51959 14 7.26524 14 7.00002V2.68402C14.3829 2.89695 14.7363 3.15918 15.051 3.46402L18.535 6.95002ZM20 19C20 19.7957 19.6839 20.5587 19.1213 21.1213C18.5587 21.684 17.7956 22 17 22H7C6.20435 22 5.44129 21.684 4.87868 21.1213C4.31607 20.5587 4 19.7957 4 19V5.00002C4 4.20437 4.31607 3.44131 4.87868 2.8787C5.44129 2.31609 6.20435 2.00002 7 2.00002H11.515C11.679 2.00002 11.838 2.03202 12 2.04702V7.00002C12 7.79567 12.3161 8.55873 12.8787 9.12134C13.4413 9.68395 14.2044 10 15 10H19.953C19.968 10.162 20 10.32 20 10.485V19Z" fill="white"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_132_365">
+                                    <rect width="24" height="24" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                        <p class="file-name">Какой-то файл</p>
+                        <svg class="delete-file" width="10" height="10" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_127_152)">
+                                <path d="M21.1838 18.0013L35.3404 3.84478C36.2199 2.966 36.2199 1.54014 35.3404 0.661358C34.4608 -0.218174 33.0365 -0.218174 32.1569 0.661358L18.0004 14.8179L3.84307 0.661358C2.96354 -0.218174 1.53918 -0.218174 0.659649 0.661358C-0.219883 1.54014 -0.219883 2.966 0.659649 3.84478L14.817 18.0013L0.659649 32.1579C-0.219883 33.0367 -0.219883 34.4625 0.659649 35.3413C1.09941 35.7803 1.67576 36.0002 2.25136 36.0002C2.82696 36.0002 3.40331 35.7803 3.84307 35.3406L18.0004 21.184L32.1569 35.3406C32.5967 35.7803 33.173 36.0002 33.7486 36.0002C34.3242 36.0002 34.9006 35.7803 35.3404 35.3406C36.2199 34.4618 36.2199 33.0359 35.3404 32.1571L21.1838 18.0013Z" fill="white"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_127_152">
+                                    <rect width="36" height="36" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="file-content">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_132_365)">
+                                <path d="M19.949 5.53602L16.465 2.05002C15.8163 1.39816 15.0449 0.881354 14.1952 0.529482C13.3456 0.177611 12.4346 -0.00234388 11.515 2.30487e-05H7C5.67441 0.00161091 4.40356 0.528905 3.46622 1.46624C2.52888 2.40358 2.00159 3.67443 2 5.00002V19C2.00159 20.3256 2.52888 21.5965 3.46622 22.5338C4.40356 23.4711 5.67441 23.9984 7 24H17C18.3256 23.9984 19.5964 23.4711 20.5338 22.5338C21.4711 21.5965 21.9984 20.3256 22 19V10.485C22.0025 9.56545 21.8225 8.65451 21.4704 7.805C21.1184 6.95548 20.6012 6.18426 19.949 5.53602ZM18.535 6.95002C18.8404 7.26417 19.103 7.61721 19.316 8.00002H15C14.7348 8.00002 14.4804 7.89467 14.2929 7.70713C14.1054 7.51959 14 7.26524 14 7.00002V2.68402C14.3829 2.89695 14.7363 3.15918 15.051 3.46402L18.535 6.95002ZM20 19C20 19.7957 19.6839 20.5587 19.1213 21.1213C18.5587 21.684 17.7956 22 17 22H7C6.20435 22 5.44129 21.684 4.87868 21.1213C4.31607 20.5587 4 19.7957 4 19V5.00002C4 4.20437 4.31607 3.44131 4.87868 2.8787C5.44129 2.31609 6.20435 2.00002 7 2.00002H11.515C11.679 2.00002 11.838 2.03202 12 2.04702V7.00002C12 7.79567 12.3161 8.55873 12.8787 9.12134C13.4413 9.68395 14.2044 10 15 10H19.953C19.968 10.162 20 10.32 20 10.485V19Z" fill="white"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_132_365">
+                                    <rect width="24" height="24" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                        <p class="file-name">Какой-то файл</p>
+                        <svg class="delete-file" width="10" height="10" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_127_152)">
+                                <path d="M21.1838 18.0013L35.3404 3.84478C36.2199 2.966 36.2199 1.54014 35.3404 0.661358C34.4608 -0.218174 33.0365 -0.218174 32.1569 0.661358L18.0004 14.8179L3.84307 0.661358C2.96354 -0.218174 1.53918 -0.218174 0.659649 0.661358C-0.219883 1.54014 -0.219883 2.966 0.659649 3.84478L14.817 18.0013L0.659649 32.1579C-0.219883 33.0367 -0.219883 34.4625 0.659649 35.3413C1.09941 35.7803 1.67576 36.0002 2.25136 36.0002C2.82696 36.0002 3.40331 35.7803 3.84307 35.3406L18.0004 21.184L32.1569 35.3406C32.5967 35.7803 33.173 36.0002 33.7486 36.0002C34.3242 36.0002 34.9006 35.7803 35.3404 35.3406C36.2199 34.4618 36.2199 33.0359 35.3404 32.1571L21.1838 18.0013Z" fill="white"/>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_127_152">
+                                    <rect width="36" height="36" fill="white"/>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="text-form">
+            <div class="input-wrapper">
+                <label>
+                    Наименование компании
+                </label>
+                <input type="text" placeholder="Наименование">
+                <p class="error">Пу пу пу</p>
+            </div>
+            <div class="input-wrapper">
+                <label>
+                    Описание компании
+                </label>
+                <textarea></textarea>
+                <p class="error">Пу пу пу</p>
+            </div>
+            <div class="input-wrapper">
+                <label>
+                    Почта
+                </label>
+                <input type="email" placeholder="Наименование">
+                <p class="error">Пу пу пу</p>
+            </div>
+            <div class="input-wrapper">
+                <label>
+                    ИНН
+                </label>
+                <input type="text" placeholder="Наименование">
+                <p class="error">Пу пу пу</p>
+            </div>
+            <div class="input-wrapper">
+                <label>
+                    КПП
+                </label>
+                <input type="text" placeholder="Наименование">
+                <p class="error">Пу пу пу</p>
+            </div>
+            <div class="input-wrapper">
+                <label>
+                    ОГРН
+                </label>
+                <input type="text" placeholder="Наименование">
+                <p class="error">Пу пу пу</p>
+            </div>
+            <div class="input-wrapper">
+                <label>
+                    Телефон
+                </label>
+                <input type="text" placeholder="Наименование">
+                <p class="error">Пу пу пу</p>
+            </div>
+            <div style="display: flex; justify-content: end">
+                <button>
+                    присоединиться
+                </button>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<div id="auth-modal" class="auth-modal close-center-modal">
+    <img src="assets/images/auth-monitor.svg" class="auth-monitor" alt="">
+    <img src="assets/images/auth-tasks.svg" class="auth-tasks" alt="">
+
+    <form action="" id="some-auth-form">
+        <div class="auth-title-wrapper">
+            <h1 id="auth-title">Авторизация</h1>
+            <button type="button" class="arrow-close" id="close-auth">
+                <img src="assets/images/arrow-close.svg"  alt="">
+            </button>
+
+        </div>
+        <div class="form-data">
+            <div class="input-wrapper">
+                <label>
+                    Логин
+                </label>
+                <input type="text" placeholder="Наименование">
+                <p class="error">Пу пу пу</p>
+            </div>
+            <div class="input-wrapper">
+                <label>
+                    Пароль
+                </label>
+                <input type="text" placeholder="Наименование">
+                <p class="error">Пу пу пу</p>
+            </div>
+            <p>Забыли пароль? <a href=""> Восстановление пароля </a></p>
+        </div>
+
+        <div style="display: flex; justify-content: end">
+            <button id="submit-button">
+                войти
+            </button>
+        </div>
+
+    </form>
+</div>
+
+<script src="assets/js/forms.js"></script>
+<script src="assets/js/modals.js"></script>
 </body>
 </html>

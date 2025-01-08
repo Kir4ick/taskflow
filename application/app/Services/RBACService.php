@@ -78,4 +78,19 @@ class RBACService
         }
     }
 
+    public function checkUserPermission(User $user, string $permission): bool
+    {
+        $roles = $user->roles()->with('permissions')->get();
+
+        foreach ($roles as $role) {
+            foreach ($role->permissions as $permission) {
+                if ($permission->title === $permission) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
 }

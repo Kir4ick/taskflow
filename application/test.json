@@ -1,0 +1,22 @@
+{
+    "id":  22,
+    "title": "Название задачи",
+    "description":  "Описание задачи",
+    "endDate": "2025-01-01 12:58:43",
+    "type":  1,
+    "priority": 0,
+    "user": {
+        "id": 1,
+        "name": "admin",
+        "email":  "admin@example.com"
+    },
+    "files": [],
+    "comments":  [],
+    "statusHistory": [],
+    "times":  [],
+    "userWorkers": []
+}
+
+
+
+
